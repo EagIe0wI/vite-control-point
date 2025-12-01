@@ -4,6 +4,7 @@ import FilterCafes from "./FilterCafes";
 
 const CafesTable = () => {
 	const [data, setData] = useState([]);
+
 	useEffect(() => {
 		const requestData = async () => {
 			const newData = await axios.get("/cafes");
@@ -13,8 +14,8 @@ const CafesTable = () => {
 		requestData();
 	}, []);
 
-	const cards = data.map((item) => (
-		<li className="card">
+	const cards = data.map((item, id) => (
+		<li className="card" key={id}>
 			<img
 				src={
 					item.img ||
@@ -31,9 +32,9 @@ const CafesTable = () => {
 	));
 
 	return (
-		<div class="cafesTable">
+		<div className="cafesTable">
 			<FilterCafes></FilterCafes>
-			<ul class="cardsList">{cards}</ul>
+			<ul className="cardsList">{cards}</ul>
 		</div>
 	);
 };

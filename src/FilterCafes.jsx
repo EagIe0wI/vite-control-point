@@ -1,5 +1,13 @@
+import { useState } from "react";
+
 const FilterCafes = () => {
-	const subwayData = [
+	const [selectedSubway, setSubway] = useState("All");
+
+	const subwayOptions = [
+		{
+			name: "Все",
+			code: "All",
+		},
 		{
 			name: "Арбатская",
 			code: "Arbat",
@@ -22,12 +30,20 @@ const FilterCafes = () => {
 		},
 	];
 
-	const options = subwayData.map((item) => <option value={item.code}>{item.name}</option>);
+	const changeSubway = (e) => {
+		setSubway(e.target.value);
+		console.log("CHENGED", e.target.value);
+	};
+
+	const options = subwayOptions.map((item, id) => (
+		<option key={id} value={item.code} onClick={changeSubway}>
+			{item.name}
+		</option>
+	));
 
 	return (
 		<div className="controls">
-			<select name="subway" id="subway">
-				<option value="All">Все</option>
+			<select className="subway" id="subway">
 				{options}
 			</select>
 		</div>
